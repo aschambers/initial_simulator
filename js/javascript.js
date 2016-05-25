@@ -8,25 +8,25 @@ var charmander = {
 		name: "Ember",
 		type: "Attack",
 		power: 20,
-		accuracy: 1
+		accuracy: 0.8
 	},
 	{
 		name: "Scratch",
 		type: "Attack",
 		power: 10,
-		accuracy: .95
+		accuracy: 0.9
 	},
 	{
 		name: "Leer",
 		type: "Defense",
 		power: 0,
-		accuracy: 1
+		accuracy: 0.8
 	},
 	{
 		name: "Growl",
 		type: "Defense",
 		power: 0,
-		accuracy: 1
+		accuracy: 0.8
 	}]
 };
 
@@ -40,25 +40,25 @@ var pikachu = {
 		name: "Thunder Shock",
 		type: "Attack",
 		power: 20,
-		accuracy: 0.5
+		accuracy: 0.7
 	},
 	{
 		name: "Thunder Wave",
 		type: "Attack",
-		power: 25,
-		accuracy: 0.5
+		power: 20,
+		accuracy: 0.7
 	},
 	{
 		name: "Tail Whip",
 		type: "Defense",
-		power: 20,
-		accuracy: 0.5
+		power: 0,
+		accuracy: 0.9
 	},
 	{
 		name: "Growl",
 		type: "Defense",
-		power: 10,
-		accuracy: 0.5
+		power: 0,
+		accuracy: 0.4
 	}]
 };
 
@@ -190,6 +190,7 @@ var playerTurn = {
 	play: function() {
 		// initiate variable.
 		var currentUserMove;
+		var currentEnemyMove;
 
 		var setUpUserField = function() {
 			// first thing we need to do is change the text of move, dynamic instead of static.
@@ -211,8 +212,6 @@ var playerTurn = {
 		var prepareToAttack = function() {
 			// need to add something at top to hide buttons.
 			$("#user-buttons").addClass("hide");
-
-
 			$("#charmander").animate({
 				top: "-=25",
 			}, 200, function() {
@@ -289,11 +288,11 @@ var playerTurn = {
 			// add hide class so it's not showing when it's charmander's turn.
 			$("#attack-img").addClass("hide");
 			// remove class, so when player position is changed, it's back to how it was in the beginning.
-			$("#attack-img").removeClass("enemy-attack-img");
+			$("#attack-img").removeClass("user-attack-img");
 			// set effect on opposing player's effect.
 			enemyPokemon.effect = currentUserMove.power;
 			// passing turn over to player
-			currentState = playerTurn;
+			currentState = enemyTurn;
 			// call loop function to make check, and continue to play with player's turn.
 			$(document).ready(loop);
 			// END OF OPPOSING PLAYER'S TURN //
